@@ -160,4 +160,17 @@ typedef struct
 #define SYSCFG_RCLK_DI() (RCC->RCC_APB2ENR &= ~(1 << 14))
 
 
+
+
+
+
+
+
+//Generic macros
+#define ENABLE 1
+#define DISABLE 0
+
+#define SET ENABLE
+#define RESET DISABLE
+
 #endif /* INC_STM32F407XX_H_ */

@@ -69,14 +69,21 @@ Discarded input sections
  .group         0x0000000000000000        0xc ./Drivers/Src/STM32F407_GPIO_Driver.o
  .group         0x0000000000000000        0xc ./Drivers/Src/STM32F407_GPIO_Driver.o
  .group         0x0000000000000000        0xc ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .group         0x0000000000000000        0xc ./Drivers/Src/STM32F407_GPIO_Driver.o
  .text          0x0000000000000000        0x0 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .data          0x0000000000000000        0x0 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .bss           0x0000000000000000        0x0 ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_info    0x0000000000000000       0x69 ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_abbrev  0x0000000000000000       0x28 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .text.GPIO_PeriClockControl
+                0x0000000000000000      0x1a0 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .text.GPIO_Init
+                0x0000000000000000       0x3e ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_info    0x0000000000000000      0x402 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_abbrev  0x0000000000000000       0xd0 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_aranges
-                0x0000000000000000       0x18 ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_macro   0x0000000000000000       0x7c ./Drivers/Src/STM32F407_GPIO_Driver.o
+                0x0000000000000000       0x28 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_rnglists
+                0x0000000000000000       0x1a ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_macro   0x0000000000000000       0x81 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_macro   0x0000000000000000      0xab4 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_macro   0x0000000000000000       0x22 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_macro   0x0000000000000000       0x8e ./Drivers/Src/STM32F407_GPIO_Driver.o
@@ -84,10 +91,12 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x103 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_macro   0x0000000000000000       0x6a ./Drivers/Src/STM32F407_GPIO_Driver.o
  .debug_macro   0x0000000000000000      0x1df ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_macro   0x0000000000000000      0x1a4 ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_line    0x0000000000000000      0x480 ./Drivers/Src/STM32F407_GPIO_Driver.o
- .debug_str     0x0000000000000000     0x47a7 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_macro   0x0000000000000000      0x1c0 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_macro   0x0000000000000000       0xc4 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_line    0x0000000000000000      0x596 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_str     0x0000000000000000     0x4cce ./Drivers/Src/STM32F407_GPIO_Driver.o
  .comment       0x0000000000000000       0x44 ./Drivers/Src/STM32F407_GPIO_Driver.o
+ .debug_frame   0x0000000000000000       0x60 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Drivers/Src/STM32F407_GPIO_Driver.o
  .group         0x0000000000000000        0xc ./Src/main.o
@@ -868,18 +877,18 @@ LOAD C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x0000000000000013       0x19 ./Startup/startup_stm32f407vgtx.o
 
-.debug_macro    0x0000000000000000      0x216
+.debug_macro    0x0000000000000000      0x232
  .debug_macro   0x0000000000000000       0x6c ./Src/main.o
- .debug_macro   0x000000000000006c      0x1aa ./Src/main.o
+ .debug_macro   0x000000000000006c      0x1c6 ./Src/main.o
 
 .debug_line     0x0000000000000000      0x4df
  .debug_line    0x0000000000000000      0x464 ./Src/main.o
  .debug_line    0x0000000000000464       0x7b ./Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x0000000000000000     0x4649
- .debug_str     0x0000000000000000     0x461a ./Src/main.o
-                                       0x4775 (size before relaxing)
- .debug_str     0x000000000000461a       0x2f ./Startup/startup_stm32f407vgtx.o
+.debug_str      0x0000000000000000     0x4675
+ .debug_str     0x0000000000000000     0x4646 ./Src/main.o
+                                       0x47a1 (size before relaxing)
+ .debug_str     0x0000000000004646       0x2f ./Startup/startup_stm32f407vgtx.o
                                          0x77 (size before relaxing)
 
 .debug_frame    0x0000000000000000       0x54
