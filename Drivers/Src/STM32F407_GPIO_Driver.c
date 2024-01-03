@@ -124,6 +124,11 @@ void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 	temp = 0;
 
 	//init the rest - pincofig values write into the pin register
+	//output type
+	pGPIOHandle->pGPIOx->OTYPER = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+
+	//configure the speed
+	pGPIOHandle->pGPIOx->OSPEEDR = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
 
 }
 
