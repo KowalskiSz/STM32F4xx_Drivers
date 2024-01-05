@@ -114,7 +114,8 @@ void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 		//Get certain value based on PIN MODE and PIN NUMBER then write the value
 		//into the PIN REGISTER
 		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-		pGPIOHandle->pGPIOx->MODER = temp;
+		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber); //Clearing the BITfield
+		pGPIOHandle->pGPIOx->MODER |= temp; // Setting  the BITfield
 	}
 	else
 	{
@@ -125,11 +126,77 @@ void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 
 	//init the rest - pincofig values write into the pin register
 	//output type
-	pGPIOHandle->pGPIOx->OTYPER = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); //clearing
+	pGPIOHandle->pGPIOx->OTYPER |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
 
 	//configure the speed
-	pGPIOHandle->pGPIOx->OSPEEDR = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR &= ~(0x3 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); //clearing
+	pGPIOHandle->pGPIOx->OSPEEDR |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+
+	//Pull up/pull down conf
+	pGPIOHandle->pGPIOx->PUPDR &= ~(0x3 << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); //clearing
+	pGPIOHandle->pGPIOx->PUPDR |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+
+	//Alternative function configuration
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFUN)
+	{
+		//LOW
+		if(pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber <= 7)
+		{
+			pGPIOHandle->pGPIOx->AFRL &= ~(0xF << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); //clearing
+			pGPIOHandle-> pGPIOx->AFRL |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+		}
+		else{
+		//HIGH
+			pGPIOHandle->pGPIOx->AFRH &= ~(0xF << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); //clearing
+			pGPIOHandle-> pGPIOx->AFRH |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+		}
+	}
 
 }
+
+
+void GPIO_DeInit(GPIO_RegDef_t* pGPIOx)
+{
+	if(pGPIOx == GPIOA)
+	{
+		GPIOA_REG_RESET();
+	}
+	else if(pGPIOx == GPIOB)
+	{
+		GPIOB_REG_RESET();
+	}
+	else if(pGPIOx == GPIOC)
+	{
+		GPIOC_REG_RESET();
+	}
+	else if(pGPIOx == GPIOD)
+	{
+		GPIOD_REG_RESET();
+	}
+	else if(pGPIOx == GPIOE)
+	{
+		GPIOE_REG_RESET();
+	}
+	else if(pGPIOx == GPIOF)
+	{
+		GPIOF_REG_RESET();
+	}
+	else if(pGPIOx == GPIOG)
+	{
+		GPIOG_REG_RESET();
+	}
+	else if(pGPIOx == GPIOH)
+	{
+		GPIOH_REG_RESET();
+	}
+}
+
+
+
+
+
+
+
 
 

@@ -159,12 +159,17 @@ typedef struct
 //Disabling the SYSCFG macros
 #define SYSCFG_RCLK_DI() (RCC->RCC_APB2ENR &= ~(1 << 14))
 
-
-
-
-
-
-
+/*
+ * Macros to RESET the GPIO peripherials (A - H)
+ */
+#define GPIOA_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 0)); (RCC->RCC_AHB1RSTR &= ~(1 << 0));}while(0)
+#define GPIOB_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 1)); (RCC->RCC_AHB1RSTR &= ~(1 << 1));}while(0)
+#define GPIOC_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 2)); (RCC->RCC_AHB1RSTR &= ~(1 << 2));}while(0)
+#define GPIOD_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 3)); (RCC->RCC_AHB1RSTR &= ~(1 << 3));}while(0)
+#define GPIOE_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 4)); (RCC->RCC_AHB1RSTR &= ~(1 << 4));}while(0)
+#define GPIOF_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 5)); (RCC->RCC_AHB1RSTR &= ~(1 << 5));}while(0)
+#define GPIOG_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 6)); (RCC->RCC_AHB1RSTR &= ~(1 << 6));}while(0)
+#define GPIOH_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7));}while(0)
 
 //Generic macros
 #define ENABLE 1
