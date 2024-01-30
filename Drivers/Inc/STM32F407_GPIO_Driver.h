@@ -17,7 +17,7 @@ typedef struct
 }GPIO_PinConf_t;
 
 
-//Handle struct of the GPIO single pin
+//Handle struct of the GPIO single Object
 typedef struct
 {
 	GPIO_RegDef_t* pGPIOx;	//Reference to certain GPIOx Port register address
@@ -104,7 +104,8 @@ typedef struct
 #define GPIO_AF_14	14
 #define GPIO_AF_15	15
 
-
+//define GPIO pin set
+#define GPIO_PIN_SET 1
 
 
 //Declaring the GPIO API's (Methods) to manage the behavior of the PIN/Entire PORT
@@ -128,7 +129,7 @@ void GPIOToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber);
 
 //Interrupt configuration and handling
 void IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t ENorDI);
-void IRGHandling(uint8_t pinNumber);
+void IRQHandling(uint8_t pinNumber);
 
 
 

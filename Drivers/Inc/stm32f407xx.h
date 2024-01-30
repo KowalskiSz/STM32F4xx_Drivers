@@ -1,3 +1,5 @@
+#include "STM32F407_GPIO_Driver.h"
+
 /*
  * Driver file containing all the necessary MCU registers and other memory locations
  */
@@ -169,7 +171,7 @@ typedef struct
 #define GPIOE_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 4)); (RCC->RCC_AHB1RSTR &= ~(1 << 4));}while(0)
 #define GPIOF_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 5)); (RCC->RCC_AHB1RSTR &= ~(1 << 5));}while(0)
 #define GPIOG_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 6)); (RCC->RCC_AHB1RSTR &= ~(1 << 6));}while(0)
-#define GPIOH_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7));}while(0)
+#define GPIOH_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7));}REGwhile(0)
 
 //Generic macros
 #define ENABLE 1

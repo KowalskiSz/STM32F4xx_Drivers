@@ -23,8 +23,38 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+void delay(void)
+{
+	for(uint32_t i = 0; i<500000; i++);
+}
+
 int main(void)
 {
-    /* Loop forever */
-	for(;;);
+    //Toggle LED PUSH-PULL Config
+	GPIO_Handle_t GPIOLED_Toggle;
+
+	//create GPIO Reg Obj
+	GPIOLED_Toggle.pGPIOx = GPIOD;
+
+	//Cofiguration of the GPIO Obj
+	GPIOLED_Toggle.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
+	GPIOLED_Toggle.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
+	GPIOLED_Toggle.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HS;
+	GPIOLED_Toggle.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUTPUT_PP;
+	GPIOLED_Toggle.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUPDOWN_NOPUPD;
+
+	//Enable the clock
+	GPIO_PeriClockControl(GPIOD, ENABLE);
+
+	//Initalization of GPIO port
+	GPIO_Init(&GPIOLED_Toggle);
+
+	while(1)
+	{
+		GPIOToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
+		delay();
+	}
+
+	return 0;
+
 }

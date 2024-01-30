@@ -106,7 +106,7 @@ void GPIO_PeriClockControl(GPIO_RegDef_t* pGPIOx, uint8_t ENorDI)
 void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 {
 	//Temporary value
-	uint8_t temp = 0;
+	uint32_t temp = 0;
 
 	//Configure the MODE of a certain PIN
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
@@ -186,16 +186,109 @@ void GPIO_DeInit(GPIO_RegDef_t* pGPIOx)
 	{
 		GPIOG_REG_RESET();
 	}
-	else if(pGPIOx == GPIOH)
+	//else if(pGPIOx == GPIOH)
+	//{
+		//GPIOH_REG_RESET();
+	//}
+}
+
+/*
+ * GPIOx Input read INPUT from certain PIN
+ */
+/*
+ * - Function name
+ * - Description
+ *
+ * - parameter
+ * - parameter
+ * - return		0 or 1
+ *
+ */
+
+uint8_t GPIO_ReadFromPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber)
+{
+	uint8_t value;
+	value = (uint8_t)((pGPIOx->IDR >> pinNumber) & 0x00000001);
+	return value;
+}
+
+/*
+ * GPIOx Input read INPUT from entire register
+ */
+/*
+ * - Function name
+ * - Description
+ *
+ * - parameter
+ * - parameter
+ * - return		16 bit value
+ *
+ */
+uint16_t GPIO_ReadFromPort(GPIO_RegDef_t* pGPIOx)
+{
+	uint16_t value;
+	value = (uint16_t)(pGPIOx->IDR);
+	return value;
+}
+
+/*
+ * GPIOx Output write by certain PIN
+ */
+/*
+ * - Function name
+ * - Description Write to output register value 0 or 1
+ *
+ * - parameter
+ * - parameter
+ * - return
+ *
+ */
+void GPIO_WriteToOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber, uint8_t value)
+{
+	if(value == GPIO_PIN_SET)
 	{
-		GPIOH_REG_RESET();
+		pGPIOx->ODR |= (1 << pinNumber);
+	}
+	else
+	{
+		pGPIOx->ODR &= ~(1 << pinNumber);
 	}
 }
 
+/*
+ * GPIOx Output write by entire GPIOx register
+ */
+/*
+ * - Function name
+ * - Description Write to output register entire 16 bit value
+ *
+ * - parameter
+ * - parameter
+ * - return
+ *
+ */
+void GRIO_WriteToOutputPort(GPIO_RegDef_t* pGPIOx, uint16_t value)
+{
+	pGPIOx->ODR = value;
+}
 
 
-
-
+/*
+ * GPIOx Output toggle the coresponding pin
+ */
+/*
+ * - Function name
+ * - Description Changes coressonding bit value to opposite by XOR logic
+ *
+ * - parameter
+ * - parameter
+ * - return
+ *
+ */
+void GPIOToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber)
+{
+	pGPIOx->ODR ^= (1 << pinNumber);
+}
 
 
 
