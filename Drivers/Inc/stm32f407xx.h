@@ -42,7 +42,7 @@
 
 //Base addresses of desire peripherials on APB2
 #define SPI_1_BASEADDR (APB2_BASEADDR + 0x3000)
-#define EXTI_BASEADDR (APB2_BASEADDR + 3C00)
+#define EXTI_BASEADDR (APB2_BASEADDR + 0x3C00)
 #define SYSCFG_BASEADDR (APB2_BASEADDR + 0x3800)
 
 
@@ -62,6 +62,17 @@ typedef struct
 	uint32_t AFRL; //GPIO alternate function low register
 	uint32_t AFRH; //GPIO alternate function high register
 }GPIO_RegDef_t;
+
+
+typedef struct
+{
+	uint32_t IMR;
+	uint32_t EMR;
+	uint32_t RTSR;
+	uint32_t FTSR;
+	uint32_t SWIER;
+	uint32_t PR;
+}EXTI_RegDef_t;
 
 
 typedef struct
@@ -112,7 +123,11 @@ typedef struct
 #define GPIOG ((GPIO_RegDef_t*)GPIOG_BASEADDR)
 #define GPIOH ((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
+//Clock register defnition
 #define RCC ((RCC_RegDef_t*)RCC_BASEADDR)
+
+//EXTI register definition
+#define EXTI ((EXTI_RegDef_t*)EXTI_BASEADDR)
 
 //Enablign the GPIOx macros
 #define GPIOA_RCLK_EN() RCC->RCC_AHB1ENR |= (1 << 0)
