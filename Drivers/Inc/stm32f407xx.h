@@ -77,6 +77,15 @@ typedef struct
 
 typedef struct
 {
+	uint32_t MEMRMP;
+	uint32_t PMC;
+	uint32_t EXTICR[4];
+	uint32_t CMPCR;
+}SYSCFG_RegDef_t;
+
+
+typedef struct
+{
 	uint32_t RCC_CR;
 	uint32_t RCC_PLLCFGR;
 	uint32_t RCC_CFGR;
@@ -128,6 +137,8 @@ typedef struct
 
 //EXTI register definition
 #define EXTI ((EXTI_RegDef_t*)EXTI_BASEADDR)
+
+#define SYSCFG ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
 //Enablign the GPIOx macros
 #define GPIOA_RCLK_EN() RCC->RCC_AHB1ENR |= (1 << 0)
@@ -194,5 +205,31 @@ typedef struct
 
 #define SET ENABLE
 #define RESET DISABLE
+
+//IRQ (interrupt request number -> define according to vector table)
+#define IRQ_EXTI0	6
+#define IRQ_EXTI1	7
+#define IRQ_EXTI2	8
+#define IRQ_EXTI3	9
+#define IRQ_EXTI4	10
+#define IRQ_EXTI9_5	23
+#define IRQ_EXTI10_15	40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* INC_STM32F407XX_H_ */

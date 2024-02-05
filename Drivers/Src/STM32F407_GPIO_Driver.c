@@ -142,6 +142,12 @@ void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 		}
 
 		//configure GPIO port selection in SYSCFG_EXTICR
+		uint8_t EXTICR_RegNum = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 4;
+		uint8_t EXTICR_BitPosition = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 4;
+
+		SYSCFG_RCLK_EN();
+		uint8_t portCode = CodeFromPinNum(pGPIOHandle->pGPIOx);
+		SYSCFG->EXTICR[EXTICR_RegNum] |= (portCode << EXTICR_BitPosition*4); //TO CHECK ON MCU Program
 
 		//enable EXTI interrupt delivery using IMR
 		EXTI->IMR |= (1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
@@ -315,6 +321,45 @@ void GPIOToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber)
 	pGPIOx->ODR ^= (1 << pinNumber);
 }
 
+
+
+
+uint8_t CodeFromPinNum(GPIO_RegDef_t* pGPIOx)
+{
+	if(pGPIOx == GPIOA)
+	{
+		return 0;
+	}
+	else if(pGPIOx == GPIOB)
+	{
+		return 1;
+	}
+	else if(pGPIOx == GPIOC)
+	{
+		return 2;
+	}
+	else if(pGPIOx == GPIOD)
+	{
+		return 3;
+	}
+	else if(pGPIOx == GPIOE)
+	{
+		return 4;
+	}
+	else if(pGPIOx == GPIOF)
+	{
+		return 5;
+	}
+	else if(pGPIOx == GPIOG)
+	{
+		return 6;
+	}
+	else if(pGPIOx == GPIOH)
+	{
+		return 7;
+	}
+
+}
 
 
 

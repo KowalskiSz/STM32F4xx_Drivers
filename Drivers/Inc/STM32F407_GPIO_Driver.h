@@ -112,6 +112,7 @@ typedef struct
 //Init and deinit of GPIO Port and RCC
 void GPIO_PeriClockControl(GPIO_RegDef_t* pGPIOx, uint8_t ENorDI);
 
+
 void GPIO_Init(GPIO_Handle_t* pGPIOHandle);
 void GPIO_DeInit(GPIO_RegDef_t* pGPIOx);
 
@@ -131,6 +132,7 @@ void GPIOToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber);
 void IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t ENorDI);
 void IRQHandling(uint8_t pinNumber);
 
-
+//pin code to number to select the source input for the EXTIx external interrupt (e.g PA -> 0, PB -> 1 PC->2)
+uint8_t CodeFromPinNum(GPIO_RegDef_t* pGPIOx);
 
 #endif /* INC_STM32F407_GPIO_DRIVER_H_ */
