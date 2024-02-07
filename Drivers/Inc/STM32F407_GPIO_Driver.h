@@ -129,7 +129,8 @@ void GRIO_WriteToOutputPort(GPIO_RegDef_t* pGPIOx, uint16_t value);
 void GPIOToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t pinNumber);
 
 //Interrupt configuration and handling
-void IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t ENorDI);
+void IRQInterruptConfig(uint8_t IRQNumber, uint8_t ENorDI);
+void IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 void IRQHandling(uint8_t pinNumber);
 
 //pin code to number to select the source input for the EXTIx external interrupt (e.g PA -> 0, PB -> 1 PC->2)

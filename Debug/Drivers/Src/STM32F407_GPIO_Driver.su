@@ -7,3 +7,5 @@
 ../Drivers/Src/STM32F407_GPIO_Driver.c:301:6:GRIO_WriteToOutputPort	16	static
 ../Drivers/Src/STM32F407_GPIO_Driver.c:319:6:GPIOToggleOutputPin	16	static
 ../Drivers/Src/STM32F407_GPIO_Driver.c:327:9:CodeFromPinNum	16	static
+../Drivers/Src/STM32F407_GPIO_Driver.c:366:6:IRQInterruptConfig	16	static
+../Drivers/Src/STM32F407_GPIO_Driver.c:404:6:IRQPriorityConfig	24	static

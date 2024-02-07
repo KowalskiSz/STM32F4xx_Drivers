@@ -1,6 +1,24 @@
 #include "STM32F407_GPIO_Driver.h"
 
 /*
+ * Processor specific macros
+ */
+
+//ARM CORTEX-M4 NVIC ISER register addresses
+#define NVIC_ISER0	((uint32_t*)0xE000E100)
+#define NVIC_ISER1	((uint32_t*)0xE000E104)
+#define NVIC_ISER2	((uint32_t*)0xE000E108)
+#define NVIC_ISER3	((uint32_t*)0xE000E10C)
+
+//ARM CORTEX-M4 NVIC ICER register addresses
+#define NVIC_ICER0	((uint32_t*)0XE000E180)
+#define NVIC_ICER1	((uint32_t*)0XE000E184)
+#define NVIC_ICER2	((uint32_t*)0XE000E188)
+#define NVIC_ICER3	((uint32_t*)0XE000E18C)
+
+#define NVIC_PR_REG	((uint32_t*)0xE000E400)
+
+/*
  * Driver file containing all the necessary MCU registers and other memory locations
  */
 #ifndef INC_STM32F407XX_H_
@@ -197,7 +215,7 @@ typedef struct
 #define GPIOE_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 4)); (RCC->RCC_AHB1RSTR &= ~(1 << 4));}while(0)
 #define GPIOF_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 5)); (RCC->RCC_AHB1RSTR &= ~(1 << 5));}while(0)
 #define GPIOG_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 6)); (RCC->RCC_AHB1RSTR &= ~(1 << 6));}while(0)
-#define GPIOH_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7));}REGwhile(0)
+#define GPIOH_REG_RESET() 	do {(RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7));}while(0)
 
 //Generic macros
 #define ENABLE 1

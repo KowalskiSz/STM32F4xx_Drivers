@@ -359,7 +359,62 @@ uint8_t CodeFromPinNum(GPIO_RegDef_t* pGPIOx)
 		return 7;
 	}
 
+	return 10;
 }
+
+//Interrupt configuration based on position value-> vector table (IRQ Number)
+void IRQInterruptConfig(uint8_t IRQNumber, uint8_t ENorDI)
+{
+	//Check for enabling the interrupt
+	if(ENorDI == ENABLE)
+	{
+		if(IRQNumber <= 31) //0 -> 31
+		{
+			*NVIC_ISER0 |= (1 << IRQNumber);
+		}
+		else if(IRQNumber > 31 && IRQNumber < 64) //32 -> 63
+		{
+			*NVIC_ISER1 |= (1 << (IRQNumber % 32));
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 96) //64 -> 95
+		{
+			*NVIC_ISER2 |= (1 << (IRQNumber % 64));
+		}
+	}
+	else
+	{
+		if(IRQNumber <= 31)
+		{
+
+			*NVIC_ICER0 |= (1 << IRQNumber); //0 -> 31
+		}
+		else if(IRQNumber > 31 && IRQNumber < 64) //32 -> 63
+		{
+			*NVIC_ICER1 |= (1 << (IRQNumber % 32));
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 96) //64 -> 95
+		{
+			*NVIC_ICER2 |= (1 << (IRQNumber % 64));
+		}
+	}
+}
+
+
+//NVIC Priority register configuration based on IRQ NUMBER and IRQ Priority value
+void IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
+{
+	//Get Priority Reg number based on IRQNumber
+	uint8_t PR_REG_Num = IRQNumber / 4;
+	uint8_t PR_Section = IRQNumber % 4;
+
+	*(NVIC_PR_REG + (PR_REG_Num * 4)) |= (IRQNumber << ( 8 * PR_Section));
+
+}
+
+
+
+
+
 
 
 
