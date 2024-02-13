@@ -9,3 +9,4 @@
 ../Drivers/Src/STM32F407_GPIO_Driver.c:327:9:CodeFromPinNum	16	static
 ../Drivers/Src/STM32F407_GPIO_Driver.c:366:6:IRQInterruptConfig	16	static
 ../Drivers/Src/STM32F407_GPIO_Driver.c:404:6:IRQPriorityConfig	24	static
+../Drivers/Src/STM32F407_GPIO_Driver.c:417:6:IRQHandling	16	static

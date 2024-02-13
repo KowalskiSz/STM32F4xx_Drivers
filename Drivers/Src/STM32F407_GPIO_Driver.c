@@ -407,12 +407,22 @@ void IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 	uint8_t PR_REG_Num = IRQNumber / 4;
 	uint8_t PR_Section = IRQNumber % 4;
 
-	*(NVIC_PR_REG + (PR_REG_Num * 4)) |= (IRQNumber << ( 8 * PR_Section));
+
+	uint8_t shift_calculation = ( 8 * PR_Section) - (8 - NO_BITS_IMPLEMENTED);
+	*(NVIC_PR_REG + (PR_REG_Num * 4)) |= (IRQNumber << shift_calculation);
 
 }
 
 
-
+void IRQHandling(uint8_t pinNumber)
+{
+	//Bit position of pending register corresponds to pin number
+	if(EXTI->PR & (1 << pinNumber))
+	{
+		//clear PR assiging 1 to bitfield
+		EXTI->PR |= (1 << pinNumber);
+	}
+}
 
 
 

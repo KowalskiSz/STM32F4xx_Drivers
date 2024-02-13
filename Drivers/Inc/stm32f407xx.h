@@ -233,7 +233,8 @@ typedef struct
 #define IRQ_EXTI9_5	23
 #define IRQ_EXTI10_15	40
 
-
+//Number of priority bits in Priorty register according to ARM CORTEX CPU
+#define NO_BITS_IMPLEMENTED 4
 
 
 
