@@ -20,7 +20,7 @@ typedef struct
 //Handle struct of the GPIO single Object
 typedef struct
 {
-	GPIO_RegDef_t* pGPIOx;	//Reference to certain GPIOx Port register address
+	GPIO_RegDef_t volatile* pGPIOx;	//Reference to certain GPIOx register address
 	GPIO_PinConf_t GPIO_PinConfig; //COnfiguration of the GPIO Pin that is pointed on
 
 }GPIO_Handle_t;

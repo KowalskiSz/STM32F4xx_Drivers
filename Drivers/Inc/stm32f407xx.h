@@ -1,4 +1,6 @@
 #include "STM32F407_GPIO_Driver.h"
+#include <stdint.h>
+
 
 /*
  * Processor specific macros
@@ -23,7 +25,7 @@
  */
 #ifndef INC_STM32F407XX_H_
 #define INC_STM32F407XX_H_
-#include <stdint.h>
+
 #define voilate __vo
 //Base addresses of the FLASH and RAM Memory of the MCU
 #define FLASH_BASEADDR	0x08000000U
@@ -65,6 +67,19 @@
 
 
 //Peripherial registers definition structures - describe all the available registers to set the behavior of the peripherials
+
+typedef struct
+{
+	uint32_t volatile SPI_CR1;
+	uint32_t volatile SPI_CR2;
+	uint32_t volatile SPI_SR;
+	uint32_t volatile SPI_DR;
+	uint32_t volatile SPI_CRCPR;
+	uint32_t volatile SPI_RXCRCR;
+	uint32_t volatile SPI_TXCRCR;
+	uint32_t volatile SPI_I2SCFGR;
+	uint32_t volatile SPI_I2SPR;
+}SPI_RegDef_t;
 
 
 typedef struct
@@ -149,6 +164,11 @@ typedef struct
 #define GPIOF ((GPIO_RegDef_t*)GPIOF_BASEADDR)
 #define GPIOG ((GPIO_RegDef_t*)GPIOG_BASEADDR)
 #define GPIOH ((GPIO_RegDef_t*)GPIOH_BASEADDR)
+
+//Peripherial definition -> SPI
+#define SPI1	((SPI_RegDef_t*)SPI_1_BASEADDR)
+#define SPI2	((SPI_RegDef_t*)SPI_2_BASEADDR)
+#define SPI3	((SPI_RegDef_t*)SPI_3_BASEADDR)
 
 //Clock register defnition
 #define RCC ((RCC_RegDef_t*)RCC_BASEADDR)

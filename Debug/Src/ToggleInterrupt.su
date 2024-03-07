@@ -1,0 +1,2 @@
+../Src/ToggleInterrupt.c:16:6:EXTI0_IRQHandler	8	static
+../Src/ToggleInterrupt.c:24:5:main	32	static
