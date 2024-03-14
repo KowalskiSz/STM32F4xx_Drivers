@@ -1,4 +1,5 @@
 #include "STM32F407_GPIO_Driver.h"
+#include "STM32F407_SPI_Driver.h"
 #include <stdint.h>
 
 
@@ -57,6 +58,7 @@
 #define I2C_1_BASEADDR (APB1_BASEADDR + 0x5400)
 #define I2C_2_BASEADDR (APB1_BASEADDR + 0x5800)
 #define I2C_3_BASEADDR (APB1_BASEADDR + 0x5C00)
+
 #define SPI_2_BASEADDR (APB1_BASEADDR + 0x3800)
 #define SPI_3_BASEADDR (APB1_BASEADDR + 0x3C00)
 

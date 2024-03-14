@@ -1,4 +1,5 @@
 "./Drivers/Src/STM32F407_GPIO_Driver.o"
+"./Drivers/Src/STM32F407_SPI_Driver.o"
 "./Src/ToggleInterrupt.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
