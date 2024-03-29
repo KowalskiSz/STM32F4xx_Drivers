@@ -71,11 +71,52 @@ typedef struct
 #define SPI_CPAH_HIGH 1
 
 //SSM Config
-#define SPI_SSM_SW 0
-#define SPI_SSM_HW 1
+#define SPI_SSM_EN 1
+#define SPI_SSM_DE 0
+
+//Bit positions of registers macros
+//SPU_CR1 reg
+
+#define CPHA	0
+#define CPOL	1
+#define MSTR	2
+#define BR		5
+#define SPE		6
+#define LSB_FIRST	7
+#define SSI		8
+#define SSM		9
+#define RX_ONLY	10
+#define DFF		11
+#define CRC_NEXT	12
+#define CRC_EN	13
+#define BIDI_OE	14
+#define BIDI_MODE	15
+
+//SPI_CR2 reg
+#define RXDMAEN	0
+#define TXDMAEN	1
+#define SSOE	2
+#define FRF		4
+#define ERRIE	5
+#define RXNEIE	6
+#define TXEIE	7
+
+//SPI_SR
+#define RXNE	0
+#define TXE		1
+#define CHSIDE	2
+#define UDR		3
+#define CRC_ERR	4
+#define MODF	5
+#define OVR		6
+#define BSY		7
+#define FRE		8
+
+//SPI Flags
+#define SPI_TXE_FLAG	(1 << TXE)
 
 
-//Methods defiintion
+//Methods defintion
 
 /*
  * Peripherial clock enabling and disabling
@@ -102,6 +143,8 @@ void SPI_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 void SPI_IRQHandling(SPI_Handle_t* pHandleSPI);
 
 
+//Helper functions
+uint8_t GetFlagStatus(SPI_RegDef_t* pSPIx, uint32_t FlagName);
 
 
 

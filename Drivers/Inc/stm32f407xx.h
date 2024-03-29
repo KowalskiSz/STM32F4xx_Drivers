@@ -246,6 +246,9 @@ typedef struct
 #define SET ENABLE
 #define RESET DISABLE
 
+#define FLAG_SET	SET
+#define FLAG_RESET	RESET
+
 //IRQ (interrupt request number -> define according to vector table)
 #define IRQ_EXTI0	6
 #define IRQ_EXTI1	7
