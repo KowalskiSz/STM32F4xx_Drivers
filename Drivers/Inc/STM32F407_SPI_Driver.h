@@ -113,7 +113,15 @@ typedef struct
 #define FRE		8
 
 //SPI Flags
+#define SPI_RXNE_FLAG	(1 << RXNE)
 #define SPI_TXE_FLAG	(1 << TXE)
+#define SPI_CHSIDE_FLAG	(1 << CHSIDE)
+#define SPI_UDR_FLAG	(1 << UDR)
+#define SPI_CRCERR_FLAG	(1 << CRC_ERR)
+#define SPI_MODF_FLAG	(1 << MODF)
+#define SPI_OVR_FLAG	(1 << OVR)
+#define SPI_BSY_FLAG	(1 << BSY)
+#define SPI_FRE_FLAG	(1 << FRE)
 
 
 //Methods defintion
@@ -132,8 +140,8 @@ void SPI_DeInit(SPI_RegDef_t* pSPIx);
 /*
  * Data send and receive
  */
-void SPI_SendData(SPI_RegDef_t* pSPIHandle, uint8_t* pTxBuffer, uint32_t len);
-void SPI_ReceiveData(SPI_RegDef_t* pSPIHandle, uint8_t* pRxBuffer, uint32_t len);
+void SPI_SendData(SPI_RegDef_t* pSPIx, uint8_t* pTxBuffer, uint32_t len);
+void SPI_ReceiveData(SPI_RegDef_t* pSPIx, uint8_t* pRxBuffer, uint32_t len);
 
 /*
  * IRQ configuration and ISR handling

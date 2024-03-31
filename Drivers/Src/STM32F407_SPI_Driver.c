@@ -9,7 +9,7 @@
 //Helper function implementation
 uint8_t GetFlagStatus(SPI_RegDef_t* pSPIx, uint32_t FlagName)
 {
-	if(pSPIx->SPI_SR & SPI_TXE_FLAG)
+	if(pSPIx->SPI_SR & FlagName)
 	{
 		return FLAG_SET;
 	}
@@ -100,11 +100,45 @@ void SPI_Init(SPI_Handle_t* pSPIHandle)
 	tempReg |= pSPIHandle->SPIConfig.SPI_SSM << 9;
 
 }
-
+/*
+ * Sending the data - get the data from function and write it to DR then the data is being written to
+ * TX buffer (we have no permission to TX and RX buffer - it can only be accessed by Data Register DR)
+ *
+ * Function is blocking call fun - it needs to be implemented without the while loops
+ * Just using the interrupts
+ */
 //Send data function implementation
-void SPI_SendData(SPI_RegDef_t* pSPIHandle, uint8_t* pTxBuffer, uint32_t len)
+void SPI_SendData(SPI_RegDef_t* pSPIx, uint8_t* pTxBuffer, uint32_t len)
 {
+	//Loop till the len of the data message is greater than 0
+	while(len > 0)
+	{
+		//Checking the TXE bit of SR register - if the transmit buffer is empty - waiting for buffer to become 1
+		while(GetFlagStatus(pSPIx, SPI_TXE_FLAG) == FLAG_RESET);
 
+		//Check the DFF bit of CR1 - verify the data format
+		if(pSPIx->SPI_CR1 & (1 << DFF))
+		{
+			//16 bit data frame - write to DR
+			pSPIx->SPI_DR = *((uint16_t)pTxBuffer);
+
+			//Decrement the data len of two bytes (16 bits)
+			len--;
+			len--;
+
+			(uint16_t*)pTxBuffer++; //moving over two bytes
+
+		}
+		else
+		{
+			//8 bit data
+			pSPIx->SPI_DR = *pTxBuffer;
+			len--;
+
+			pTxBuffer++;
+		}
+
+	}
 }
 
 
